@@ -1,4 +1,4 @@
-# random-csv-generator
+# csv-generator
 
 A fast and simple CSV file generator. No dependencies and easy to config.
 
