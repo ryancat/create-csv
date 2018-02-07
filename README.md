@@ -22,6 +22,12 @@ The name of the file generated.
 
 The column definition. The order should be `column header`, `data type` and `data count`. Please refer to example above.
 
+### --seed
+
+* Default: `1`
+
+The pseudo-random seed. Same seed will always generate same set of data
+
 ## TODO
 
 * Adding more configs based on feedback
