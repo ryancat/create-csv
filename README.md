@@ -6,7 +6,7 @@ A fast and simple CSV file generator. No dependencies and easy to config.
 
 `create-csv --filename demo --column 'column 1' string 1000 --column 'column 2' number 500 --seed 111`
 
-The above command will generate a file named 'demo' under same directory with generator.js. The file will contains two columns (namely `column 1` and `column 2`), The first column will contain 1000 string data, and the second will contain 500 number data. The total data point will be `1000 * 2 = 2000`, with the missing ones filled with `null`.
+The above command will generate a file named 'demo' under current directory. The file will contains two columns (namely `column 1` and `column 2`), The first column will contain 1000 string data, and the second will contain 500 number data. The total data point will be `1000 * 2 = 2000`, with the missing ones filled with `null`.
 
 The same arguments will *always* generate the same csv file with pseudo-random data. You can optionally use `seed` option to control the random outcomes.
 
