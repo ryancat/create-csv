@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const fs = require('fs')
 const argv = process.argv
 
@@ -11,6 +13,16 @@ const startTimestamp = Date.now(),
       clearIntervalKey = setInterval(() => process.stdout.write('.'), 500)
 
 // Build paramMap
+// Store the example process.argv as
+// {
+//   filename: [
+//     ['demo']
+//   ],
+//   column: [
+//     ['column 1', '1000', 'string'],
+//     ['column 2', '500', 'number']
+//   ]
+// }
 let paramMap = {}
 const paramRegExp = /^--(\w+)$/
 argv.reduce((group, arg) => {
@@ -29,14 +41,10 @@ argv.reduce((group, arg) => {
   return group
 }, [])
 
-// Now the example process.argv will be stored as
-// { filename: [['demo']], column: [['column 1', 'string', '1000'], ['column 2', 'string', '500']]}
-
 /**
  * Get param by the given param key
  * 
  * @param {String} paramKey 
- * @returns {Array}
  */
 const getParamGroup = (paramKey) => {
   if (paramMap[paramKey]) {
@@ -51,13 +59,23 @@ const columns = getParamGroup('column') || [],
       rowCount = Math.max.apply(null, [0].concat(columns.map(column => parseInt(column[2] || 0, 10)))),
       seed = getParamGroup('seed') ? getParamGroup('seed')[0][0] : 1
 
-let filename = getParamGroup('filename')[0][0] || startTimestamp.toString()
+let filename = (getParamGroup('filename') && getParamGroup('filename')[0][0]) || startTimestamp.toString()
 console.log(`Generating dataset ${filename} with ${columnCount} columns and ${rowCount} rows.`)
 
 // Generate data
-const getSeedRandomGenerator = (seed) => (index) => `0.${Math.sin(seed + index).toString().substr(6)}`
-const seedRandom = getSeedRandomGenerator(seed)
+/**
+ * Generate pseudo random data like '0.123456789'
+ *  
+ * @param {Integer} index 
+ */
+const seedRandom = (index) => `0.${Math.sin(seed + index).toString().substr(6)}`
 
+/**
+ * Get array of random data based on given data type and data cound
+ * 
+ * @param {String} dataType 
+ * @param {String} dataCount 
+ */
 const getRandomDataByTypeAndCount = (dataType, dataCount) => {
   let result = []
 
@@ -83,14 +101,14 @@ const getRandomDataByTypeAndCount = (dataType, dataCount) => {
 
 let data = []
 columns.forEach((column, columnIndex) => {
-  const [columnHeader = `column ${columnIndex}`, dataType = 'string', dataCount = '0'] = column
+  const [columnHeader = `column ${columnIndex}`, dataCount = '0', dataType = 'string'] = column
   let columnData = [columnHeader]
 
   columnData = columnData.concat(getRandomDataByTypeAndCount(dataType, parseInt(dataCount, 10)))
   data.push(columnData)
 })
 
-// Zip the data
+// Zip the data (matrix rotation)
 let zippedData = []
 data.forEach((columnData, columnDataIndex) => {
   columnData.forEach((d, dIndex) => {
