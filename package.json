@@ -1,18 +1,19 @@
 {
-  "name": "csv-generator",
+  "name": "create-csv",
   "version": "0.0.4",
   "description": "A csv generator produces random data",
   "main": "generator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "patch-release": "npm version patch && npm publish && git push --follow-tags"
+    "patch-release": "npm version patch && npm publish && git push --follow-tags",
+    "minor-release": "npm version minor && npm publish && git push --follow-tags"
   },
   "bin": {
-    "csv-generator": "csv-generator.js"
+    "create-csv": "generator.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryancat/csv-generator.git"
+    "url": "git+https://github.com/ryancat/create-csv.git"
   },
   "keywords": [
     "csv",
@@ -23,7 +24,7 @@
   "author": "Ryan Chen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ryancat/csv-generator/issues"
+    "url": "https://github.com/ryancat/create-csv/issues"
   },
-  "homepage": "https://github.com/ryancat/csv-generator#readme"
+  "homepage": "https://github.com/ryancat/create-csv#readme"
 }
