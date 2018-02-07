@@ -1,6 +1,6 @@
 {
   "name": "csv-generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A csv generator produces random data",
   "main": "generator.js",
   "scripts": {
