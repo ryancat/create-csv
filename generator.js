@@ -101,7 +101,7 @@ const getRandomDataByTypeAndCount = (dataType, dataCount) => {
 
 let data = []
 columns.forEach((column, columnIndex) => {
-  const [columnHeader = `column ${columnIndex}`, dataCount = '0', dataType = 'string'] = column
+  const [columnHeader = `column ${columnIndex}`, dataType = 'string', dataCount = '0'] = column
   let columnData = [columnHeader]
 
   columnData = columnData.concat(getRandomDataByTypeAndCount(dataType, parseInt(dataCount, 10)))
